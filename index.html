@@ -7,7 +7,7 @@
 		<link rel="stylesheet" href="https://d3oaxc4q5k2d6q.cloudfront.net/m/6fac1fb24100/compressed/css/89f5798fc49c.css" type="text/css" />
 	</head>
 
-	<body>
+	<body style="padding:20px;">
 
 	<section id="wiki-content" class="wiki-content">
 	      <h1 id="markdown-header-setting-up-ssl-certificates-for-apache-on-nix">Setting Up SSL Certificates for Apache on *nix</h1>
@@ -22,8 +22,19 @@
 	</ul>
 	<hr>
 	<h2 id="markdown-header-apache-virtualhost-443-template-ssl">Apache VirtualHost 443 Template (SSL)</h2>
+
 	<p>Find and replace on this string (with your server info): fr-s-swpg-cpt-p.ncifcrf.gov</p>
+	<p>AND this path: /path/toWebFiles/fr-s-swpg-cpt-p/htdocs (with your path)</p>
+	<p>AND this path: /path/toWebFiles/fr-s-swpg-cpt-p/cgi-bin/ (with your path, or completely remove "cgi-bin" directives)
+	<p>If you choose NOT to use the template below, because your environment is different, simply make sure you add these two lines to your :</p>
+	
+	<div class="codehilite"><pre>
+	SSLCertificateFile /etc/ssl/certs/YOUR_CERT_FILE_NAME.crt
+    SSLCertificateKeyFile /etc/ssl/certs/YOUR_CERT_FILE_NAME.key
+	</pre></div>
+
 	<hr>
+	
 	<div class="codehilite"><pre><span class="nt">&lt;IfModule</span> <span class="na">mod_ssl</span><span class="err">.</span><span class="na">c</span><span class="nt">&gt;</span>
 	<span class="nt">&lt;VirtualHost</span> <span class="na">_default_:443</span><span class="nt">&gt;</span>
 	        ServerAdmin abcc-webmaster@ncifcrf.gov
