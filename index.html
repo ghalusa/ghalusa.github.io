@@ -1,0 +1,90 @@
+<html>
+
+<body>
+
+<section id="wiki-content" class="wiki-content">
+      <h1 id="markdown-header-setting-up-ssl-certificates-for-apache-on-nix">Setting Up SSL Certificates for Apache on *nix</h1>
+<ul>
+<li>sudo apt-get install vim <em>(optional... out of the box, regular vim is suboptimal)</em></li>
+<li>sudo a2enmod ssl</li>
+<li>sudo mkdir /etc/ssl/certs/ &lt;-- <strong>[put cert files in here, or any directory not in the web root]</strong></li>
+<li><strong>[only for homegrown ssl certs]</strong> --&gt; sudo openssl req -x509 -nodes -days 1825 -newkey rsa:2048 -keyout /etc/ssl/certs/apache.key -out /etc/ssl/certs/apache.crt</li>
+<li>sudo vi /etc/apache2/sites-available/default-ssl (completely empty this file and re-populate using the template below)</li>
+<li>sudo a2ensite default-ssl</li>
+<li>sudo service apache2 restart</li>
+</ul>
+<hr>
+<h2 id="markdown-header-apache-virtualhost-443-template-ssl">Apache VirtualHost 443 Template (SSL)</h2>
+<p>Find and replace on this string (with your server info): fr-s-swpg-cpt-p.ncifcrf.gov</p>
+<hr>
+<div class="codehilite"><pre><span class="nt">&lt;IfModule</span> <span class="na">mod_ssl</span><span class="err">.</span><span class="na">c</span><span class="nt">&gt;</span>
+<span class="nt">&lt;VirtualHost</span> <span class="na">_default_:443</span><span class="nt">&gt;</span>
+        ServerAdmin abcc-webmaster@ncifcrf.gov
+        ServerName fr-s-swpg-cpt-p.ncifcrf.gov
+
+        DocumentRoot /path/toWebFiles/fr-s-swpg-cpt-p/htdocs
+        <span class="nt">&lt;Directory</span> <span class="nt">/&gt;</span>
+                Options FollowSymLinks
+                AllowOverride None
+        <span class="nt">&lt;/Directory&gt;</span>
+        <span class="nt">&lt;Directory</span> <span class="err">/</span><span class="na">path</span><span class="err">/</span><span class="na">toWebFiles</span><span class="err">/</span><span class="na">fr-s-swpg-cpt-p</span><span class="err">/</span><span class="na">htdocs</span><span class="nt">/&gt;</span>
+                EnableMMAP Off
+                EnableSendfile Off
+                Options FollowSymLinks
+                #AllowOverride AuthConfig FileInfo Indexes Limit Options=FollowSymLinks,Indexes
+                AllowOverride All
+                Order allow,deny
+                allow from all
+        <span class="nt">&lt;/Directory&gt;</span>
+
+        Alias /cgi-bin/ /path/toWebFiles/fr-s-swpg-cpt-p/cgi-bin/
+        <span class="nt">&lt;Directory</span> <span class="err">"/</span><span class="na">path</span><span class="err">/</span><span class="na">toWebFiles</span><span class="err">/</span><span class="na">fr-s-swpg-cpt-p</span><span class="err">/</span><span class="na">cgi-bin</span><span class="err">/"</span><span class="nt">&gt;</span>
+                AllowOverride AuthConfig FileInfo Indexes
+                <span class="nt">&lt;FilesMatch</span> <span class="err">.+</span><span class="nt">&gt;</span>
+                        SetHandler cgi-script
+                <span class="nt">&lt;/FilesMatch&gt;</span>
+                Options +ExecCGI -MultiViews +SymLinksIfOwnerMatch
+                DirectoryIndex index.cgi
+                Order allow,deny
+                Allow from all
+        <span class="nt">&lt;/Directory&gt;</span>
+
+        ErrorLog /var/log/apache2/error.log
+
+        # Possible values include: debug, info, notice, warn, error, crit,
+        # alert, emerg.
+        LogLevel warn
+
+        #CustomLog /var/log/apache2/ssl_access.log combined
+        CustomLog "|/usr/bin/tee -a /var/log/apache2/access.log | /usr/bin/logger -p local5.info -t apache2 " combined
+
+        TraceEnable off
+
+        #   SSL Engine Switch:
+        #   Enable/Disable SSL for this virtual host.
+        SSLEngine on
+
+        SSLCertificateFile /etc/ssl/certs/YOUR_CERT_FILE_NAME.crt
+        SSLCertificateKeyFile /etc/ssl/certs/YOUR_CERT_FILE_NAME.key
+
+        #   SSL Engine Options:
+        <span class="nt">&lt;FilesMatch</span> <span class="err">"\.(</span><span class="na">cgi</span><span class="err">|</span><span class="na">shtml</span><span class="err">|</span><span class="na">phtml</span><span class="err">|</span><span class="na">php</span><span class="err">)$"</span><span class="nt">&gt;</span>
+                SSLOptions +StdEnvVars
+        <span class="nt">&lt;/FilesMatch&gt;</span>
+        <span class="nt">&lt;Directory</span> <span class="err">"/</span><span class="na">path</span><span class="err">/</span><span class="na">toWebFiles</span><span class="err">/</span><span class="na">fr-s-swpg-cpt-p</span><span class="err">/</span><span class="na">cgi-bin</span><span class="err">/"</span><span class="nt">&gt;</span>
+                SSLOptions +StdEnvVars
+        <span class="nt">&lt;/Directory&gt;</span>
+
+        #   SSL Protocol Adjustments:
+        BrowserMatch ".*MSIE.*" \
+                nokeepalive ssl-unclean-shutdown \
+                downgrade-1.0 force-response-1.0
+
+<span class="nt">&lt;/VirtualHost&gt;</span>
+<span class="nt">&lt;/IfModule&gt;</span>
+</pre></div>
+    </section>
+
+</body>
+
+</html>
