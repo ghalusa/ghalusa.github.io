@@ -11,6 +11,7 @@
 
 	<section id="wiki-content" class="wiki-content">
 	      <h1 id="markdown-header-setting-up-ssl-certificates-for-apache-on-nix">Setting Up SSL Certificates for Apache on *nix</h1>
+	<p>These instructions are specifically for Apache, in a Debian Linux environment. Similar steps can be taken on another flavor of Linux.</p>
 	<ul>
 	<li>sudo apt-get install vim <em>(optional... out of the box, regular vim is suboptimal)</em></li>
 	<li>sudo a2enmod ssl</li>
@@ -26,8 +27,8 @@
 	<p>Find and replace on this string (with your server info): fr-s-swpg-cpt-p.ncifcrf.gov</p>
 	<p>AND this path: /path/toWebFiles/fr-s-swpg-cpt-p/htdocs (with your path)</p>
 	<p>AND this path: /path/toWebFiles/fr-s-swpg-cpt-p/cgi-bin/ (with your path, or completely remove "cgi-bin" directives)
-	<p>If you choose NOT to use the template below, because your environment is different, simply make sure you add these two lines to your :</p>
-	
+	<p>If you choose NOT to use the template below, because your environment is different, simply make sure you add these two lines to your "default-ssl" configuration:</p>
+
 	<div class="codehilite"><pre>
 	SSLCertificateFile /etc/ssl/certs/YOUR_CERT_FILE_NAME.crt
     SSLCertificateKeyFile /etc/ssl/certs/YOUR_CERT_FILE_NAME.key
