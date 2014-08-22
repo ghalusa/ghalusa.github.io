@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="">
+    <meta name="keywords" content="">
+    <meta name="author" content="Assay Portal: Admin Notes">
+
+    <title>Assay Portal: Admin Notes</title>
+
+    <!-- Bootstrap core CSS -->
+    <link href="//cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.2.0/css/bootstrap.css" rel="stylesheet">
+    <link href="//cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.2.0/css/bootstrap-theme.css" rel="stylesheet">
+
+    <!-- Custom styles for this template -->
+    <style type="text/css">
+      body {
+        padding-top: 50px;
+      }
+      .starter-template {
+        padding: 40px 15px;
+        text-align: center;
+      }
+      hr {
+        margin: 30px 0;
+      }
+      img {
+        border: 2px solid #444;
+      }
+    </style>
+
+    <!-- HTML5 shim and Respond.js IE8 support of HTML5 elements and media queries -->
+    <!--[if lt IE 9]>
+      <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+      <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
+    <![endif]-->
+  </head>
+
+  <body>
+
+    <div class="container">
+
+      <div class="starter-template">
+
+        <h1>CPTAC Assay Portal: Assay Import Documentation</h1>
+
+        <div class="row">
+          <div class="col-sm-12">
+            <h2>Add Import Metadata</h2>
+            <p>This is the first step, and needs to be completed before executing the import. The information entered in this interface can be 
+              revisisted and modified at any time.</p>
+            <img src="images/cptac/01_import_metadata_01.png" alt="Add Import Metadata screenshot" class="img-responsive">
+
+            <hr>
+
+            <h2>Add Import Metadata - Panorama Directory</h2>
+            <p>The 'Panorama Directory' field is only field which <strong>should not</strong> be modified, unless 
+              the directory has changed out on Panorama.</p>
+            <img src="images/cptac/01_import_metadata_02.png" alt="Add Import Metadata - Panorama Directory screenshot" class="img-responsive">
+
+            <hr>
+
+            <h2>Execute Import</h2>
+            <p>From here, imports can be executed. If there are any issues after the initial import has been 
+              executed, the "Health Report" section is populated with any problematic data and imagery. Problematic 
+              data and imagery occur due to sporatic performance issues with Panorama's API. To attempt to fix 
+              issues, the ability to re-execute the import against the problematic images and data has been 
+              integrated. It may take 2-3 runs to fix all existing issues. If issues persist,  
+              <a href="https://assays.cancer.gov/support/" target="_blank">a support ticket</a> can 
+              and should be submitted.</p>
+            <img src="images/cptac/02_execute_import.png" alt="Execute Import screenshot" class="img-responsive">
+
+            <hr>
+
+            <h2>Delete Import</h2>
+            <p>If the import is problematic, and all options have been exhausted, it can be completely deleted, 
+              without affecting other existing data on the Assay Portal. In other words, if data is wrong out on 
+              Panorama, the issues should first be fixed there. It is not possible to "edit" or "modify" any imported 
+              data on the Assay Portal, aside from the Metadata.</p>
+            <img src="images/cptac/03_delete_this_import.png" alt="Delete Import screenshot" class="img-responsive">
+
+            <hr>
+
+            <h2>Preview Assays - Landing</h2>
+            <p>After the import has been successfully executed, assays can be previewed as they would appear on the 
+              Portal. These assays are not public until the NCI Assay Review Team has marked them as approved.</p>
+            <img src="images/cptac/04_preview_assays_01.png" alt="Preview Assays - Landing screenshot" class="img-responsive">
+
+            <hr>
+
+            <h2>Preview Assays - Interface</h2>
+            <p>The status of assays are depicted by color-coded rows. A row in red means it is disapproved, while a row 
+              in green means it has been approved. If a row is neither red nor green, it means it hasn't been reviewed 
+              by the NCI Assay Review Team.</p>
+            <img src="images/cptac/05_preview_assays_02.png" alt="Preview Assays - Interface screenshot" class="img-responsive">
+
+            <hr>
+
+            <h2>Preview Assays - Notes</h2>
+            <p>Notes can be added by both Laboratories and the NCI Assay Review Team. This provides the means to communicate on individual 
+              assays, during the review process.</p>
+            <img src="images/cptac/06_preview_assays_03.png" alt="Preview Assays - Notes screenshot" class="img-responsive">
+
+            <br>
+            <br>
+
+            <p><em>Last modified on August 22, 2014. Prepared by <a href="mailto:halusagn@mail.nih.gov">Goran Halusa</a>, <a href="https://www.leidos.com/about/companies/leidos-biomedical-research" target="_blank">Leidos Biomedical Research, Inc.</a></em></p>
+          </div>
+        </div>
+      </div>
+
+    </div><!-- /.container -->
+
+
+    <!-- Bootstrap core JavaScript
+    ================================================== -->
+    <!-- Placed at the end of the document so the pages load faster -->
+    <script src="//ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
+    <script src="//cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.2.0/js/bootstrap.min.js"></script>
+
+  </body>
+</html>
